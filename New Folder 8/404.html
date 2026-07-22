@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>404 · no tile at this address</title>
+    <meta name="description" content="This URL doesn't correspond to any of the ten thousand tiles on The Time Capsule Billboard." />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      body {
+        display: grid;
+        place-items: center;
+        min-height: 100vh;
+        text-align: center;
+        padding: 24px;
+      }
+      .error { max-width: 520px; }
+      .error__code {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: clamp(4rem, 14vw, 7rem);
+        color: var(--accent);
+        margin: 0 0 12px;
+        line-height: 0.9;
+        letter-spacing: -0.06em;
+      }
+      .error__title {
+        font-family: 'Fraunces', Georgia, serif;
+        font-style: italic;
+        font-weight: 400;
+        font-size: clamp(1.4rem, 3vw, 2rem);
+        margin: 0 0 18px;
+        color: var(--ink);
+        letter-spacing: -0.01em;
+      }
+      .error__body {
+        color: var(--ink-soft);
+        margin: 0 0 28px;
+        line-height: 1.55;
+      }
+      .error__back {
+        display: inline-block;
+        padding: 10px 18px;
+        border: 1px solid var(--ink);
+        border-radius: 4px;
+        color: var(--ink);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.85rem;
+        transition: background 160ms, color 160ms, transform 90ms, box-shadow 90ms;
+      }
+      .error__back:hover {
+        background: var(--ink);
+        color: var(--bg);
+        transform: translate(-1px, -1px);
+        box-shadow: 3px 3px 0 var(--accent);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="error">
+      <div class="error__code">404</div>
+      <h1 class="error__title">no tile at this address.</h1>
+      <p class="error__body">
+        either you mistyped the URL, or this tile has been reclaimed by time. <br />
+        try the homepage &mdash; ten thousand others remain.
+      </p>
+      <a href="/" class="error__back">return to the billboard →</a>
+    </main>
+    <script>
+      // Respect previously saved theme preference.
+      try {
+        const saved = localStorage.getItem('tcb.theme');
+        if (saved === 'dark' || saved === 'light') {
+          document.documentElement.setAttribute('data-theme', saved);
+        }
+      } catch (_) {}
+    </script>
+  </body>
+</html>

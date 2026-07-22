@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="description" content="The Time Capsule Billboard. 10,000 micro-messages, permanently etched. Yours for $3." />
+    <meta name="theme-color" content="#f6f3ec" />
+    <title>The Time Capsule Billboard — 10,000 messages, permanently yours.</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css" />
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23f6f3ec'/%3E%3Crect x='4' y='4' width='6' height='6' fill='%231a1a1f'/%3E%3Crect x='12' y='4' width='6' height='6' fill='%23b8704a'/%3E%3Crect x='20' y='4' width='6' height='6' fill='%231a1a1f'/%3E%3Crect x='4' y='12' width='6' height='6' fill='%23b8704a'/%3E%3Crect x='12' y='12' width='6' height='6' fill='%231a1a1f'/%3E%3Crect x='20' y='12' width='6' height='6' fill='%23b8704a'/%3E%3Crect x='4' y='20' width='6' height='6' fill='%231a1a1f'/%3E%3Crect x='12' y='20' width='6' height='6' fill='%23b8704a'/%3E%3Crect x='20' y='20' width='6' height='6' fill='%231a1a1f'/%3E%3C/svg%3E" />
+  </head>
+  <body class="min-h-screen antialiased">
+    <!-- ============== NAV ============== -->
+    <nav class="nav">
+      <div class="nav__inner">
+        <a href="#billboard" class="brand" aria-label="The Time Capsule Billboard">
+          <span class="brand__logo" aria-hidden="true">
+            <span class="brand__logo-cell"></span>
+            <span class="brand__logo-cell"></span>
+            <span class="brand__logo-cell"></span>
+            <span class="brand__logo-cell"></span>
+            <span class="brand__logo-cell"></span>
+            <span class="brand__logo-cell"></span>
+            <span class="brand__logo-cell"></span>
+            <span class="brand__logo-cell"></span>
+            <span class="brand__logo-cell"></span>
+          </span>
+          <span class="brand__name">
+            <span class="brand__name-line">The Time Capsule</span>
+            <span class="brand__name-line brand__name-line--alt">Billboard</span>
+          </span>
+        </a>
+
+        <div class="nav__meta">
+          <div class="status" aria-live="polite">
+            <span class="status__dot"></span>
+            <span class="status__label">system online</span>
+          </div>
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+            <span class="theme-toggle__icon theme-toggle__icon--sun" aria-hidden="true">☀</span>
+            <span class="theme-toggle__icon theme-toggle__icon--moon" aria-hidden="true">☾</span>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ============== HERO ============== -->
+    <header class="hero">
+      <div class="hero__inner">
+        <div class="hero__eyebrow">
+          <span class="mono">EST. 2026 ·</span>
+          <span class="mono">PROJECT #001 ·</span>
+          <span class="mono mono--accent">PERMANENT ARCHIVE</span>
+        </div>
+
+        <h1 class="display">
+          Ten thousand <em>micro&#8209;messages</em>,<br />
+          permanently etched,<br />
+          <span class="display__alt">forever <em class="display__cursor">yours<span class="cursor">█</span></em></span>
+        </h1>
+
+        <p class="lede">
+          A one&#8209;hundred&#8209;by&#8209;one&#8209;hundred grid of digital square inches. Each is a fossil from this exact moment — a sentence, an emoji, a joke, a prayer, a secret. Pick yours. Pay three dollars. Leave a mark that won't fade.
+        </p>
+
+        <div class="ticker" aria-label="Billboard stats">
+          <div class="ticker__row">
+            <span class="ticker__cell"><span class="ticker__label">in archive</span><span class="ticker__value" id="stat-filled">0</span><span class="ticker__of">/10,000</span></span>
+            <span class="ticker__sep">·</span>
+            <span class="ticker__cell"><span class="ticker__label">your claims</span><span class="ticker__value" id="stat-claims">0</span></span>
+            <span class="ticker__sep">·</span>
+            <span class="ticker__cell"><span class="ticker__label">revenue</span><span class="ticker__value" id="stat-revenue">$0</span></span>
+            <span class="ticker__sep">·</span>
+            <span class="ticker__cell"><span class="ticker__label">uptime</span><span class="ticker__value" id="stat-uptime">00:00:00</span></span>
+          </div>
+          <div class="ticker__row ticker__row--feed">
+            <span class="ticker__cell ticker__cell--live"><span class="ticker__label">latest live claim</span><span class="ticker__value ticker__value--msg" id="stat-latest">—</span></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============== BILLBOARD ============== -->
+    <main>
+      <section class="billboard-wrap" id="billboard">
+        <div class="billboard-frame">
+          <div class="billboard-frame__corner billboard-frame__corner--tl"></div>
+          <div class="billboard-frame__corner billboard-frame__corner--tr"></div>
+          <div class="billboard-frame__corner billboard-frame__corner--bl"></div>
+          <div class="billboard-frame__corner billboard-frame__corner--br"></div>
+
+          <div class="billboard-frame__chrome">
+            <span class="mono mono--dim">/billboard/v1</span>
+            <span class="mono mono--dim">grid · 100×100 · tilesize · 22px</span>
+            <span class="mono mono--dim" id="archive-mode">archive · linking…</span>
+            <span class="mono mono--accent" id="visible-coord">viewing: 00,00</span>
+          </div>
+
+          <div class="billboard" id="grid" role="grid" aria-label="Time Capsule Billboard">
+            <!-- 10,000 tiles injected by script.js -->
+          </div>
+
+          <div class="billboard-frame__chrome billboard-frame__chrome--bottom">
+            <span class="mono mono--dim">drag to pan · click a tile to inspect · </span>
+            <span class="mono mono--accent">empty tiles cost $3</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============== HOW IT WORKS ============== -->
+      <section class="pillars">
+        <article class="pillar">
+          <div class="pillar__num mono">/01</div>
+          <h2 class="pillar__title">Find your square inch.</h2>
+          <p class="pillar__body">
+            Any tile on the board. There are ten thousand, and each one is unique. Drift the cursor and watch the corridor light up — it's a small museum of human noise.
+          </p>
+        </article>
+        <article class="pillar">
+          <div class="pillar__num mono">/02</div>
+          <h2 class="pillar__title">Leave a mark.</h2>
+          <p class="pillar__body">
+            Fifty characters. One emoji. A timestamp nailed to the second you claimed it. That's all you get. That's all you need.
+          </p>
+        </article>
+        <article class="pillar">
+          <div class="pillar__num mono">/03</div>
+          <h2 class="pillar__title">It does not fade.</h2>
+          <p class="pillar__body">
+            No editing. No takedowns. No renewal fees. Your tile joins a permanent public artifact — like graffiti on a wall that's bigger than the sky.
+          </p>
+        </article>
+      </section>
+
+      <!-- ============== TIMELINE STRIP ============== -->
+      <section class="ledger" aria-label="Recent claims ticker">
+        <div class="ledger__head">
+          <span class="mono mono--accent">▸ live ledger</span>
+          <span class="mono mono--dim">scrolls upward in real time</span>
+        </div>
+        <div class="ledger__body" id="ledger"></div>
+      </section>
+    </main>
+
+    <!-- ============== FOOTER ============== -->
+    <footer class="footer">
+      <div class="footer__inner">
+        <div class="footer__col">
+          <div class="mono mono--dim">a project by no one in particular</div>
+          <div class="mono mono--dim">© 2026 — permanent, irrevocable.</div>
+        </div>
+        <div class="footer__col footer__col--center">
+          <a href="#" class="footer__link mono">manifesto</a>
+          <a href="#" class="footer__link mono">press kit</a>
+          <a href="#" class="footer__link mono">contact</a>
+        </div>
+        <div class="footer__col footer__col--right">
+          <div class="mono mono--dim">made with html, a paper napkin,</div>
+          <div class="mono mono--dim">and a quiet kind of stubbornness.</div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============== TOOLTIP ============== -->
+    <div id="tooltip" class="tooltip" role="tooltip" aria-hidden="true"></div>
+
+    <!-- ============== MODAL ============== -->
+    <div id="modal-root" class="modal-root" aria-hidden="true">
+      <div class="modal-backdrop" data-close></div>
+      <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <button class="modal__close" data-close aria-label="Close">×</button>
+        <!-- Dynamic content injected here -->
+      </div>
+    </div>
+
+    <!-- ============== TOAST ============== -->
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+    <!--
+      config.js (gitignored) sets window.__SUPABASE_URL__ + __SUPABASE_ANON_KEY__
+      + __STRIPE_PK__. If missing or still the placeholder, the app silently
+      falls back to localStorage + mock-Stripe. See config.example.js +
+      supabase/README.md + STRIPE.md.
+    -->
+    <script src="config.js"></script>
+    <!-- Stripe.js — only used when __STRIPE_PK__ is set. Loaded synchronously,
+         exposes window.Stripe(). Required by script.js → processStripePayment. -->
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
