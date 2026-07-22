@@ -1,0 +1,57 @@
+# =============================================================
+# Netlify configuration — The Time Capsule Billboard
+# Static site (no build step). Publishes the repo root.
+# =============================================================
+
+[build]
+  publish  = "."
+  command  = ""
+  functions = "netlify/functions"
+
+# -------------------------------------------------------------
+# Global security headers (every response)
+# -------------------------------------------------------------
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options            = "DENY"
+    X-Content-Type-Options     = "nosniff"
+    Referrer-Policy            = "strict-origin-when-cross-origin"
+    Permissions-Policy         = "geolocation=(), microphone=(), camera=(), interest-cohort=()"
+    Cross-Origin-Opener-Policy = "same-origin"
+    # Content-Security-Policy scoped to this app's actual CDN needs.
+    # `unsafe-inline` is required because:
+    #   • Tailwind's runtime script injects inline <style> tags.
+    #   • The page has inline event attributes in a few places.
+    # `frame-ancestors 'none'` supersedes X-Frame-Options for modern browsers.
+    # Supabase additions:
+    #   script-src:      cdn.jsdelivr.net (Supabase JS lib)
+    #   connect-src:     *.supabase.co (REST) + wss://*.supabase.co (Realtime)
+    # Stripe additions:
+    #   script-src:      js.stripe.com (Stripe.js loader)
+    #   frame-src:       js.stripe.com (Payment Element iframe) + hooks.stripe.com (3DS)
+    #   connect-src:     api.stripe.com (PaymentIntent confirm)
+    #   form-action:     hooks.stripe.com (3DS POST)
+    Content-Security-Policy    = "default-src 'self'; script-src 'self' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://js.stripe.com 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://api.stripe.com; base-uri 'self'; form-action 'self' https://hooks.stripe.com; frame-src 'self' https://js.stripe.com https://hooks.stripe.com; frame-ancestors 'none'"
+
+# -------------------------------------------------------------
+# Static-asset cache strategy
+# No build step means no content-hashed filenames, so we cannot use
+# `immutable` cached-for-a-year. Short TTL + forced revalidation gives
+# near-immediate deploy rollouts without sacrificing CDN delivery.
+# -------------------------------------------------------------
+[[headers]]
+  for = "/styles.css"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+[[headers]]
+  for = "/script.js"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"
+
+# HTML: short cache so deploys go live quickly without CDN lock-in
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300, must-revalidate"

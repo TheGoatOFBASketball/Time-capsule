@@ -1,0 +1,8 @@
+# Netlify _redirects
+# Format:  /from    /to    <status>
+#
+# Send every unknown path to the branded not-found page,
+# returning a true 404 (not a soft 200) so crawlers don't index junk.
+# Also keeps Twitter / social previews clean when a deep-link tile ID
+# is mistyped: /tile-999999 falls through to a real 404 page.
+/*    /404.html    404
